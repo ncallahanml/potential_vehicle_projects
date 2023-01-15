@@ -22,7 +22,7 @@ The latest YOLO models are available for both object detection and instance segm
 ### Model Versions:
 YOLOv7 is almost universally better than YOLOv5 in terms of both performance and accuracy, though currently YOLOv5 is easier to handle in the code.
 - `5` - YOLOv5 generation of models
-- `7` - YOLOv7 generation of models
+- `8` - YOLOv7 generation of models
 
 ### Model Sizes:
 Larger model sizes mean better accuracy, but slower processing.
@@ -52,7 +52,7 @@ yolov **$MODELVERSION** **$MODELSIZE** _ **$TRAININGSET**.pt
 
 ### Examples:
 
-*yolov7-e6_coco.pt*  
+*yolov8-e6_coco.pt*  
 *yolov5-seg_aerl.pt*
 
 ## Tracking
@@ -165,13 +165,13 @@ Necessary scheduled restarts for the system to attempt to avoid unexpected crash
 | COCO | Aerial | Parking Lot | Objective | Size |
 |:----:|:------:|:-----------:|:---------:|:----:|
 |[yolov5m_coco.pt]()    | [yolov5m_aerl.pt]()    | [yolov5m_pklt.pt]()    | **Object Detection**      | `Medium`      |
-|[yolov7_coco.pt]()     | [yolov7_aerl.pt]()     | [yolov7_pklt.pt]()     | **Object Detection**      | `Medium`      |
-|[yolov7x_coco.pt]()    | [yolov7x_aerl.pt]()    | [yolov7x_pklt.pt]()    | **Object Detection**      | `Large`       |
+|[yolov8_coco.pt]()     | [yolov8_aerl.pt]()     | [yolov8_pklt.pt]()     | **Object Detection**      | `Medium`      |
+|[yolov8x_coco.pt]()    | [yolov8x_aerl.pt]()    | [yolov8x_pklt.pt]()    | **Object Detection**      | `Large`       |
 |[yolov5x_coco.pt]()    | [yolov5x_aerl.pt]()    | [yolov5x_pklt.pt]()    | **Object Detection**      | `Large`       |
 |[yolov5-l6_coco.pt]()  | [yolov5-l6_aerl.pt]()  | [yolov5-l6_pklt.pt]()  | **Object Detection**      | `Extra Large` |
-|[yolov7-e6_coco.pt]()  | [yolov7-e6_aerl.pt]()  | [yolov7-e6_pklt.pt]()  | **Object Detection**      | `Extra Large` |
+|[yolov8-e6_coco.pt]()  | [yolov8-e6_aerl.pt]()  | [yolov8-e6_pklt.pt]()  | **Object Detection**      | `Extra Large` |
 |[yolov5-seg_coco.pt]() | [yolov5-seg_aerl.pt]() | [yolov5-seg_pklt.pt]() | **Instance Segmentation** | `Large`       |
-|[yolov7-seg_coco.pt]() | [yolov7-seg_aerl.pt]() | [yolov7-seg_pklt.pt]() | **Instance Segmentation** | `Large`       |
+|[yolov8-seg_coco.pt]() | [yolov8-seg_aerl.pt]() | [yolov8-seg_pklt.pt]() | **Instance Segmentation** | `Large`       |
 
 
 ### Class Numbers & Labels:
