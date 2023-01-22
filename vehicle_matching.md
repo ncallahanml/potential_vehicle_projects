@@ -4,7 +4,7 @@
 ## Motivation
 Many applications exist for individual monitoring and measurement of vehicle via traffic camera video feeds. 
 To extend these tools between cameras, being able to extend tracking to vehicles from one camera to another is essential.
-This process is an extension of re-identification, or ReID, which has been studied extensively in [`object tracking`](https://paperswithcode.com/task/object-tracking), especially using [`detections of people`](https://paperswithcode.com/task/person-re-identification)
+This process is an extension of re-identification, or ReID, which has been studied extensively in [`object tracking`](https://paperswithcode.com/task/object-tracking), especially using [`detections of people`](https://paperswithcode.com/task/person-re-identification).
 The tracking of vehicles come with significant ethical considerations, the intent of this project is *NOT* to match vehicles with individuals, 
 such as with unique features or license plate identification,
 but instead to track the travel of specific vehicle makes/models within a given area.
@@ -20,9 +20,17 @@ but this reduces the potential for abuse in monitoring locations of individuals.
 
 ## Methods
 - Supervised Neural Networks
+  - Siamese Networks
+  - Convolutional Networks with Differenced Input
 - Semi Supervised Networks
+  - Extension of Pretrained Supervised Networks
+  - Categorical Clustering
 - Unsupervised Networks
+  - Tracking Supplemented Networks
+  - Automated Image Matching
 - Position Prediction Networks
+  - Positional LSTM
+  - Positional Feature Ensemble
 
 ## Relevant Papers
 
