@@ -20,20 +20,20 @@ Measure the occupancy of a parking lot by learning the number of available parki
 The latest YOLO models are available for both object detection and instance segmentation. Many options exist to balance performance and accuracy, detection should be quite accurate out of the box during the daytime. 
 
 ### Model Versions:
-YOLOv7 is almost universally better than YOLOv5 in terms of both performance and accuracy, though currently YOLOv5 is easier to handle in the code.
+YOLOv8 is almost universally better than YOLOv5 in terms of both performance and accuracy, though YOLOv5 has been more thoroughly tested within the system.
 - `5` - YOLOv5 generation of models
-- `8` - YOLOv7 generation of models
+- `8` - YOLOv8 generation of models
 
 ### Model Sizes:
 Larger model sizes mean better accuracy, but slower processing.
-- ` `    - Default model, smallest available size
-- `x`    - Increased size of default model
-- `-e6`  - Largest available model
+- `s`    - Default model, smallest available size
+- `m`    - Increased size of default model
+- `x`  - Largest available model
 - `-seg` - Midsized segmentation model
 
 ### Training Sets:
 
-The default YOLOv5 and YOLOv7 are pretrained on the COCO dataset, which does a great job of detecting vehicles. However, to better deal with parking lots in particular more options are added. To accomodate detection of empty parking spaces, two aggregate datasets were assembled from existing parking datasets and used to fine tune the COCO detections. Performance should not be impacted by dataset selection, but COCO offers more flexibility.
+The default YOLOv5 and YOLOv8 are pretrained on the COCO dataset, which does a great job of detecting vehicles. However, to better deal with parking lots in particular more options are added. To accomodate detection of empty parking spaces, two aggregate datasets were assembled from existing parking datasets and used to fine tune the COCO detections. Performance should not be impacted by dataset selection, but COCO offers more flexibility.
 
 - `coco` -  Standard object detection & instance segmentation set for large scale pretraining including vehicles & people
   - [`COCO2017`](https://cocodataset.org/#download)
@@ -52,7 +52,7 @@ yolov **$MODELVERSION** **$MODELSIZE** _ **$TRAININGSET**.pt
 
 ### Examples:
 
-*yolov8-e6_coco.pt*  
+*yolov8-x_coco.pt*  
 *yolov5-seg_aerl.pt*
 
 ## Tracking
