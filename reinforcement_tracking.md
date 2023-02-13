@@ -1,7 +1,8 @@
 # Reinforcement Tracking
 
 When implementing object tracking on a complex traffic scene, a few glaring issues came to the forefront with out-of-the-box object multi-object trackers (MOTs).
-Most of these issues fit into the following categories:
+Most of these issues fit into the following categories:  
+
 **Interoperability**:  
 Some trackers are designed as standalone systems, they fail to integrate with other models and trackers and can be challenging to draw tracking information/coordinate
 information from for use with extensions of the data. Even trackers that handle multiple models well lack some clarity when it comes to processing inputs and formatting 
@@ -97,3 +98,15 @@ Ideally, the performance of a tracker for this situation is actually measured re
 Continuity
 Clean Swaps: two object IDs swap with eachother, neither decrements the metric but both are wrong
 Frame Departure: Vehicles leaving frame will only be able to reduce the metric, even if it is a natural progression. See limited sectioning to understand the approach for reducing the impact of this case.
+
+# Matching Methods:
+Given a set of coordinates and predicted coordinates, how do we match the sets to one another? 
+**Hungarian Algorithm**: 
+- O(n^3)
+- Optimal solution
+- Input of cost matrix (euclidian distance)
+
+**Approximation Algorithm**:
+- Much faster
+- Non optimal solution
+- varying inputs
