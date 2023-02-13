@@ -79,3 +79,21 @@ Here the goal is full time object tracking. Out of the box accuracy would be nic
 | Current Angle |
 | Change in Angle |
 
+**Metrics**:
+Multiple metrics are used at different stages in the tracking process to train the individual networks. These are the crux of the difficult in building a network for this purpose, and are inherent to the utility and construction of reinforcement networks in general: given a complex world without labeled data, how do we convert visible states into both a useful computational representation, and a robust value that measures the effect of the outputs given that state. This takes on different forms, and how well scalar values represent the actual information is of crucial importance for allowing the network to converge appropriately.
+
+#### Matching Score (temporary name):
+To measure matching of vehicle connections is a simple task if ground truth is given, in this case that would be in the form of unique IDs associated with objects across multiple frames. Existing datasets for tracking problems exist for this purpose, [add citation](), but they are not useful for tuning a network on specific real world data. Instead, the following approach is used to get a sense of how well the match was.
+
+The following relies on a continuity assumption: vehicles frame to frame will not dissapear, ideally every vehicle detection in frame 0 will have 1 and only 1 valid match in frame 1, and this applies until vehicles leave the edge of the frame. This assumption can be violated, or appear to be violated, for example with vehicles that are occluded or left undetected, or when a section of time is skipped. Aside from these, which should be edge cases, we want an ideal score to reflect 1 to 1 matching frame 0 to frame 1.
+
+Frequently, 1 to 1 matching in trackers is _forced_, because once an object is matched it is removed from the set. This artificially results in a potentially perfect matching score regardless of how well the tracker actually performed. This can be avoided by _not_ removing matched vehicles from the set, and waiting to see if the tracker will incorrectly rematch them. This turns into each object being associated with an m to 1 value, where m is greater than 0 and less than the total number of vehicles in the initial frame. In this case each value of m contributes to the score: if m is 1, score is 1, if m is 0 (no match made) score is 0, anything else is weighted according to the bias the network should exhibiti towards false positive or false negative matches.
+
+#### Backtrack Score:
+Ideally, the performance of a tracker for this situation is actually measured retrospectively - after the tracked object has left the frame, how far was it correctly tracked for the path? The ideal score is the entire duration of the measurement, from one edge of the frame to the other the same object was detected without any interupts and without the value jumping unrealistically between coordinates. This can be evaluated as soon as the unique ID is no longer available for matching. The distribution of matching times could have a variety of distributions, suggesting mean may not be an ideal measure of said distribution, but trimming or entropy measurements may provide a useful solution that handles tracking replacements in robust fashion.
+
+
+#### Potential Faults:
+Continuity
+Clean Swaps: two object IDs swap with eachother, neither decrements the metric but both are wrong
+Frame Departure: Vehicles leaving frame will only be able to reduce the metric, even if it is a natural progression. See limited sectioning to understand the approach for reducing the impact of this case.
