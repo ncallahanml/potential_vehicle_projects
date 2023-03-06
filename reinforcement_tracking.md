@@ -100,7 +100,8 @@ Clean Swaps: two object IDs swap with eachother, neither decrements the metric b
 Frame Departure: Vehicles leaving frame will only be able to reduce the metric, even if it is a natural progression. See limited sectioning to understand the approach for reducing the impact of this case.
 
 # Matching Methods:
-Given a set of coordinates and predicted coordinates, how do we match the sets to one another? 
+Given a set of coordinates and predicted coordinates, how do we match the sets to one another?  
+
 **Hungarian Algorithm**: 
 - O(n^3)
 - Optimal solution
@@ -110,3 +111,16 @@ Given a set of coordinates and predicted coordinates, how do we match the sets t
 - Much faster
 - Non optimal solution
 - varying inputs
+
+#### Transitioning:
+The common exploration vs exploitation problem exists in matching coordinates. Some possible methods for adding noise to outputs:
+- 2D Gaussian function input, variance dependent on direction at each coordinate
+- Added factor for 2d uniform noise, simulate camera shake
+
+There exists a baseline model which acts in a supervisory role. Functioning similar to the MCTS in AlphaZero paper, a costlier but more accurate estimator must be used as a baseline to provide ground truth for training the model. In this case, a baseline tracker must be used, multiple options for this exist within the other projects. However, as the DL model begins to converge improvements may be available to the baseline model in the average case, even while the overall DL model is less performant. Options to exploit this:
+- Add Linear shifting factor between two outputs:
+  - $$ \hat{y} = \lambda T_standard_y + (1 - \lambda) T_nn_y
+  - $$ \hat{x} = \lambda T_standard_x + (1 - \lambda) T_nn_x
+- Add Linear shifting factor with outlier removal
+
+This can also be used to build up a confidence value about each individual prediction, especially if multiple standard trackers are included. Weight adjustments can be added to the neural network, where the overall loss function weights coordinate residuals based on both direction of parent Gaussian direction (mahalanobis distance) and the likelihood of each coordinate being tracked correctly by the standard method. When multiple standard methods converge on a single estimate, this should be treated as more impactful _iff_ standard trackers being used can be assumed to be approximately independent. This may be achieved by different implementation methods or different parameter choices. It is important to not implement similar standard trackers that are highly correlated even when missing predictions and use their outputs as especially high in confidence. Low correlation in error is what is desirable when building a suite of trackers to use for weight estimation. Additionally, areas that are fed with less data and thus have less consistent input parameters or areas with especially high variance can be underweighted in the loss function to improve average case effectiveness of the backpropagation.
